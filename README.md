@@ -6,7 +6,7 @@ Este repositorio contiene el keymap personalizado llamado `alejandromolinamedina
 
 ## 📦 Requisitos
 
-- Tener instalado QMK CLI
+- Tener instalado QMK CLI [Documentación oficial](https://docs.qmk.fm/newbs_getting_started).
 - Haber clonado el firmware oficial de QMK en tu sistema (por ejemplo en `~/qmk_firmware`)
 
 ---
@@ -16,7 +16,7 @@ Este repositorio contiene el keymap personalizado llamado `alejandromolinamedina
 ### 1. Clona este repositorio
 
 ```bash
-git clone https://github.com/TU_USUARIO/lily58-keymap.git
+git clone https://github.com/AlejandroMolinaMedina/lily58-keymap.git
 ```
 
 ### 2. Elimina el keymap original en QMK (si existe)
