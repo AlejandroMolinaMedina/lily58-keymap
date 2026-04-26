@@ -14,7 +14,8 @@ enum custom_keycodes {
     KC_ARROBA = SAFE_RANGE,  // puedes agregar más abajo si necesitas más
     KC_PICOR,
     KC_PICOL,
-    KC_INVERT
+    KC_INVERT, 
+    KC_S_S_A
 };
 
 
@@ -40,7 +41,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 SEND_STRING(SS_DOWN(X_RALT) SS_TAP(X_MINUS) SS_UP(X_RALT));
             }
-    return false;
+            return false;
+        case KC_S_S_A:
+            if (record->event.pressed) {
+                // Send window + shift + s
+                SEND_STRING(SS_LGUI(SS_LSFT(SS_TAP(X_S))));
+            }
+            return false;
 
     }
     return true;
@@ -61,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [1] = LAYOUT(
   XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                         KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
-  XXXXXXX, KC_ARROBA, KC_UP, XXXXXXX, XXXXXXX,  XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PSCR, XXXXXXX,
+  XXXXXXX, KC_ARROBA, KC_UP, XXXXXXX, XXXXXXX,  XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_S_S_A, XXXXXXX,
   _______, KC_LEFT, KC_DOWN,  KC_RIGHT, XXXXXXX, XXXXXXX,                        KC_LEFT, KC_DOWN, KC_UP,  KC_RIGHT, KC_SCLN, XXXXXXX,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, KC_PICOL,       KC_PICOR, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
                              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX,  XXXXXXX, KC_LGUI, XXXXXXX
