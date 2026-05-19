@@ -7,6 +7,7 @@
 #endif
 extern bool oled_task_user(void);
 
+#include "secrets.h"
 //alejandroMolinaMedina
 
 
@@ -15,7 +16,12 @@ enum custom_keycodes {
     KC_PICOR,
     KC_PICOL,
     KC_INVERT, 
-    KC_S_S_A
+    KC_S_S_A,
+    KC_SCRT,
+    KC_SCRT1,
+    KC_SCRT2,
+    KC_SCRT3
+
 };
 
 
@@ -48,6 +54,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_LGUI(SS_LSFT(SS_TAP(X_S))));
             }
             return false;
+        case KC_SCRT:
+            if (record->event.pressed) {
+                SEND_STRING(SECRET);
+            }
+            return false;
+        case KC_SCRT1:
+            if (record->event.pressed) {
+                SEND_STRING(SECRET1);
+            }
+            return false;
+        case KC_SCRT2:
+            if (record->event.pressed) {
+                SEND_STRING(SECRET2);
+            }
+            return false;
+        case KC_SCRT3:
+            if (record->event.pressed) {
+                SEND_STRING(SECRET3);
+            }
+            return false; 
 
     }
     return true;
@@ -63,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
   KC_LSFT,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                            KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT, KC_BSLS,
   KC_LCTL,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_GRV,          KC_BSPC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RALT,
-                                MO(1), KC_LALT, TG(2), KC_SPC,        KC_SPC, MO(2), KC_ENT, KC_RBRC
+                                MO(1), KC_LALT, TG(2), MO(3),        KC_SPC, MO(2), KC_ENT, KC_RBRC
 ),
 
 [1] = LAYOUT(
@@ -84,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
   [3] = LAYOUT(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  KC_SCRT, KC_SCRT1, KC_SCRT2, KC_SCRT3, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
