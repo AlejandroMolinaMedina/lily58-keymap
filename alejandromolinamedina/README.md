@@ -1,5 +1,3 @@
-Aquí tienes el contenido completo para tu `README.md` incluyendo los mapas visuales de las capas estructurados en bloques de código para que se rendericen correctamente.
-
 
 # Custom Split Keyboard Layout (Lily58 / Corne Type)
 
