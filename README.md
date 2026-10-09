@@ -67,9 +67,9 @@ Cuando aparezca `Waiting for USB serial port - reset your controller now`, toca 
 
 ### Qué mitad hay que flashear
 
-El cable USB va en la **mitad izquierda**, que es la maestra.
+El cable USB va en la **mitad derecha**, que es la maestra (`MASTER_RIGHT` en `config.h`).
 
-- **Cambios de keymap** (teclas, capas, macros): basta flashear la **izquierda**. En un split de QMK la mitad esclava solo manda el estado crudo de su matriz; toda la interpretación la hace la maestra.
+- **Cambios de keymap** (teclas, capas, macros): basta flashear la **derecha**. En un split de QMK la mitad esclava solo manda el estado crudo de su matriz; toda la interpretación la hace la maestra.
 - **Cambios de `config.h` o `rules.mk`**: hay que flashear **las dos mitades**, una a la vez, moviendo el cable USB.
 
 ---
