@@ -17,7 +17,10 @@ Este repositorio contiene la configuración personalizada de mi teclado mecánic
 Capa alfanumérica estándar por defecto. Combina modificadores esenciales y la gestión de capas en los pulgares para máxima ergonomía.
 
 * **MO(1):** Mantiene activa la **Capa 1** (Símbolos/Navegación).
-* **TG(2):** Alterna (Toggle) el encendido/apagado de la **Capa 2** (Secretos).
+* **MO(2):** Mantiene activa la **Capa 2** (Secretos), en el pulgar derecho.
+* **TG(3):** Alterna (Toggle) la **Capa 3**, en el pulgar izquierdo. Ojo: la capa 3
+  esta casi vacia, asi que si la activas sin querer el teclado parece muerto.
+  Se sale presionando esa misma tecla otra vez, o desconectando el teclado.
 * **Encoders:** Giro antihorario (`KC_VOLD` - Bajar volumen) / Giro horario (`KC_VOLU` - Subir volumen).
 
 ```text
@@ -32,7 +35,7 @@ Capa alfanumérica estándar por defecto. Combina modificadores esenciales y la 
 └──────────────┴─────┴───────┴───────┴───┬───┴───┬───┴───┤ ├───┴───┬───┴───┬───┴───┬───────┴─────┴──────────┘
                                          │ MO(1) │ LALT  │ │ SPACE │ MO(2) │
                                          │       ├───────┤ ├───────┤       │
-                                         │ TG(2) │ SPACE │ │ ENTER │  ]    │
+                                         │ TG(3) │ SPACE │ │ ENTER │  ]    │
                                          └───────┴───────┘ └───────┴───────┘
 
 ```
@@ -71,9 +74,9 @@ Se accede manteniendo presionado el botón asignado en el pulgar izquierdo. Dise
 
 ---
 
-### Capa 2: Secretos y Credenciales (Toggle)
+### Capa 2: Secretos y Credenciales
 
-Se activa por completo presionando una vez el botón `TG(2)`. Modifica la fila numérica superior para la inserción automatizada de cadenas de texto persistentes.
+Se activa manteniendo presionado `MO(2)` en el pulgar derecho. Modifica la fila numérica superior para la inserción automatizada de cadenas de texto persistentes.
 
 * **Fila Superior:** Mapea las macros de `KC_SCRT` a `KC_SCRT3`, las cuales inyectan los strings `SECRET`, `SECRET1`, `SECRET2` y `SECRET3` definidos de forma privada.
 * **Navegación Extra:** Mantiene el bloque de flechas izquierdo activo junto con un acceso directo a `Delete` (`KC_DEL`) en la sección central del pulgar derecho.
@@ -90,7 +93,7 @@ Se activa por completo presionando una vez el botón `TG(2)`. Modifica la fila n
 └──────────────┴─────┴───────┴───────┴───┬───┴───┬───┴───┤ ├───┴───┬───┴───┬───┴───┬───────┴─────┴──────────┘
                                          │       │       │ │       │       │
                                          │       ├───────┤ ├───────┤       │
-                                         │ TG(2) │       │ │       │       │
+                                         │ TG(3) │       │ │       │       │
                                          └───────┴───────┘ └───────┴───────┘
 
 ```
