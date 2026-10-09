@@ -22,8 +22,7 @@ enum custom_keycodes {
     KC_SCRT2,
     KC_SCRT3,
     KC_SCRT4,
-    KC_SCRT5,
-    KC_SCRT6
+    KC_SCRT5
 };
 
 
@@ -90,15 +89,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_DOWN(X_RALT) SS_TAP(X_Q) SS_UP(X_RALT));
                 SEND_STRING(SECRET5_DOMAIN);
             }
-            return false; 
-        case KC_SCRT6:
-            if (record->event.pressed) {
-                SEND_STRING(SECRET6_USER);
-                SEND_STRING(SS_DOWN(X_RALT) SS_TAP(X_Q) SS_UP(X_RALT));
-                SEND_STRING(SECRET6_DOMAIN);
-            }
-            return false; 
-
+            return false;
     }
     return true;
 }
@@ -126,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 [2] = LAYOUT(
-  KC_SCRT, KC_SCRT1,KC_SCRT2,KC_SCRT3, KC_SCRT4,KC_SCRT5,                        KC_SCRT6, _______, _______, _______, _______, _______,
+  KC_SCRT, KC_SCRT1,KC_SCRT2,KC_SCRT3, KC_SCRT4,KC_SCRT5,                        XXXXXXX, _______, _______, _______, _______, _______,
   XXXXXXX, KC_ARROBA, KC_UP, XXXXXXX, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   KC_RSFT, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       KC_DEL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
