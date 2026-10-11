@@ -25,6 +25,33 @@ git clone https://github.com/AlejandroMolinaMedina/lily58-keymap.git
 
 **Este paso es obligatorio.** `secrets.h` está en `.gitignore` a propósito, así que el clon no lo trae y sin él la compilación falla con `error: 'SECRET' undeclared`.
 
+**Si tienes acceso a la llave**, descifra la copia cifrada con [sops](https://github.com/getsops/sops). La llave privada de `age` vive solo en el servidor (`~/.config/sops/age/keys.txt` en el host `sops-server`) y `sops` la pide por SSH al descifrar:
+
+`sops-server` es un alias que tienes que definir en `~/.ssh/config`:
+
+```
+Host sops-server
+  HostName <ip-del-servidor>
+  User <usuario>
+```
+
+```bash
+cd lily58-keymap
+export SOPS_AGE_KEY_CMD="ssh sops-server cat .config/sops/age/keys.txt"
+sops decrypt --input-type json --output-type binary \
+  alejandromolinamedina/secrets.h.enc > alejandromolinamedina/secrets.h
+```
+
+Si cambias `secrets.h`, vuelve a cifrarlo y sube el `.enc` (para cifrar no hace falta la llave privada, solo la pública que está en `.sops.yaml`):
+
+```bash
+sops encrypt --input-type binary --output-type json \
+  --filename-override alejandromolinamedina/secrets.h.enc \
+  alejandromolinamedina/secrets.h > alejandromolinamedina/secrets.h.enc
+```
+
+**Si no tienes la llave**, parte del ejemplo:
+
 ```bash
 cd lily58-keymap
 cp alejandromolinamedina/secrets.h.example alejandromolinamedina/secrets.h

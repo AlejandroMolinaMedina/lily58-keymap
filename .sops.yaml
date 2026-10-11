@@ -1,0 +1,4 @@
+# La llave privada vive en ~/.config/sops/age/keys.txt en el host sops-server (alias de ~/.ssh/config)
+creation_rules:
+  - path_regex: secrets\.h\.enc$
+    age: age1d2jlkpt443dh78f76f2y4jeefa3tfuwnxealwr905f8ejaffaanq9l53f2
