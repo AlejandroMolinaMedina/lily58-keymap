@@ -22,7 +22,9 @@ enum custom_keycodes {
     KC_SCRT2,
     KC_SCRT3,
     KC_SCRT4,
-    KC_SCRT5
+    KC_SCRT5,
+    KC_SCRT6
+    
 };
 
 
@@ -90,6 +92,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SECRET5_DOMAIN);
             }
             return false;
+        case KC_SCRT6:
+            if (record->event.pressed) {
+                SEND_STRING(SECRET6);
+            }
+            return false;
     }
     return true;
 }
@@ -112,12 +119,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, KC_ARROBA, KC_UP, XXXXXXX, XXXXXXX,  XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_S_S_A, XXXXXXX,
   _______, KC_LEFT, KC_DOWN,  KC_RIGHT, XXXXXXX, XXXXXXX,                        KC_LEFT, KC_DOWN, KC_UP,  KC_RIGHT, KC_SCLN, XXXXXXX,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, KC_PICOL,       KC_PICOR, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
-                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX,  XXXXXXX, KC_LGUI, KC_INVERT
+                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX,  TG(4), KC_LGUI, KC_INVERT
 ),
 
 
 [2] = LAYOUT(
-  KC_SCRT, KC_SCRT1,KC_SCRT2,KC_SCRT3, KC_SCRT4,KC_SCRT5,                        XXXXXXX, _______, _______, _______, _______, _______,
+  KC_SCRT, KC_SCRT1,KC_SCRT2,KC_SCRT3, KC_SCRT4,KC_SCRT5,                        KC_SCRT6, _______, _______, _______, _______, _______,
   XXXXXXX, KC_ARROBA, KC_UP, XXXXXXX, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   KC_RSFT, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       KC_DEL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
@@ -131,13 +138,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_GRV,       KC_DEL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                             XXXXXXX, XXXXXXX, TG(3), XXXXXXX,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
+[4] = LAYOUT(
+  _______, _______, _______, _______, _______, _______,                          _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______,                          _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______,                          _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______, _______,       _______,  _______, _______, _______, _______, _______, _______,
+                             _______, KC_LGUI, KC_LALT, _______,       _______, _______, _______, _______
+),
 };
+
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),      ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [1] =  { ENCODER_CCW_CW(KC_TRNS, KC_TRNS),      ENCODER_CCW_CW(KC_TRNS, KC_TRNS)},
     [2] =  { ENCODER_CCW_CW(KC_TRNS, KC_TRNS),      ENCODER_CCW_CW(KC_TRNS, KC_TRNS)},
-    [3] =  { ENCODER_CCW_CW(KC_TRNS, KC_TRNS),      ENCODER_CCW_CW(KC_TRNS, KC_TRNS)}
+    [3] =  { ENCODER_CCW_CW(KC_TRNS, KC_TRNS),      ENCODER_CCW_CW(KC_TRNS, KC_TRNS)},
+    [4] =  { ENCODER_CCW_CW(KC_TRNS, KC_TRNS),      ENCODER_CCW_CW(KC_TRNS, KC_TRNS)}
 };
 #endif
 // clang-format on

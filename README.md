@@ -57,7 +57,7 @@ cd lily58-keymap
 cp alejandromolinamedina/secrets.h.example alejandromolinamedina/secrets.h
 ```
 
-Luego edita `secrets.h` y pon tus valores. Los ocho `#define` son obligatorios; el archivo de ejemplo explica qué es cada uno.
+Luego edita `secrets.h` y pon tus valores. Los nueve `#define` son obligatorios; el archivo de ejemplo explica qué es cada uno.
 
 ### 3. Elimina el keymap original en QMK (si existe)
 
@@ -71,7 +71,20 @@ rm -rf ~/qmk_firmware/keyboards/mechboards/lily58/pro/keymaps/alejandromolinamed
 ln -s ~/lily58-keymap/alejandromolinamedina ~/qmk_firmware/keyboards/mechboards/lily58/pro/keymaps/alejandromolinamedina
 ```
 
-> Ajusta las rutas si QMK o este repositorio están en otras ubicaciones.
+> Las rutas de arriba son las de Linux. Ajústalas si QMK o este repositorio están en otras ubicaciones.
+
+**En macOS** este repositorio vive en `~/Documents/projects/amm/lily58-keymap`, así que el enlace es:
+
+```bash
+ln -s ~/Documents/projects/amm/lily58-keymap/alejandromolinamedina \
+      ~/qmk_firmware/keyboards/mechboards/lily58/pro/keymaps/alejandromolinamedina
+```
+
+Antes de seguir, comprueba que el enlace no quedó colgante: este `ls` tiene que listar `keymap.c`, no dar error.
+
+```bash
+ls ~/qmk_firmware/keyboards/mechboards/lily58/pro/keymaps/alejandromolinamedina/
+```
 
 ### 5. (Opcional) Fija el teclado y el keymap por omisión
 
@@ -107,7 +120,26 @@ El cable USB va en la **mitad derecha**, que es la maestra (`MASTER_RIGHT` en `c
 - Bootloader **Caterina**, se flashea con `avrdude` por el puerto serie. **No genera `.uf2`** ni usa modo BOOTSEL.
 - **No se usa `CONVERT_TO`**: el ATmega32U4 es el procesador nativo de la placa.
 - Esta placa **no tiene OLED ni LEDs RGB**. Por eso `rules.mk` los apaga; es obligatorio, no una preferencia. Con el OLED activado el firmware intenta hablar por i2c con una pantalla ausente y acaba bloqueando el escaneo de la matriz.
-- El firmware ocupa **18420 de 28672 bytes (64%)**. Con OLED y RGB activados se va al 97%, sin margen para agregar nada.
+- El firmware ocupa **18448 de 28672 bytes (64%)**. Con OLED y RGB activados se va al 97%, sin margen para agregar nada.
+
+### Si `qmk flash` o `qmk compile` no encuentra el keymap
+
+Casi siempre es el enlace del paso 4 apuntando a una ruta que no existe. El síntoma engaña: `ls -la` sí muestra el enlace en la carpeta de keymaps, pero `ls` sobre el enlace falla con `No such file or directory`.
+
+```bash
+ls -la ~/qmk_firmware/keyboards/mechboards/lily58/pro/keymaps/
+ls ~/qmk_firmware/keyboards/mechboards/lily58/pro/keymaps/alejandromolinamedina/
+```
+
+Pasó en macOS por copiar el paso 4 tal cual: el comando usa `~/lily58-keymap` y en esa máquina el repositorio está en `~/Documents/projects/amm/lily58-keymap`. Se arregla borrando el enlace y rehaciéndolo con la ruta real:
+
+```bash
+rm ~/qmk_firmware/keyboards/mechboards/lily58/pro/keymaps/alejandromolinamedina
+ln -s ~/Documents/projects/amm/lily58-keymap/alejandromolinamedina \
+      ~/qmk_firmware/keyboards/mechboards/lily58/pro/keymaps/alejandromolinamedina
+```
+
+Probado en macOS (Darwin 24.5) con `qmk` 1.2.0 instalado en `~/.local/bin/qmk`: con el enlace bueno, `qmk compile` termina y reporta el tamaño del firmware.
 
 ### Si el teclado deja de responder
 
