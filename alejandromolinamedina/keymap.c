@@ -17,6 +17,7 @@ enum custom_keycodes {
     KC_PICOL,
     KC_INVERT, 
     KC_S_S_A,
+    KC_S_S_AMAC,
     KC_SCRT,
     KC_SCRT1,
     KC_SCRT2,
@@ -57,6 +58,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_LGUI(SS_LSFT(SS_TAP(X_S))));
             }
             return false;
+
+        case KC_S_S_AMAC:
+            if (record->event.pressed) {
+                 // Enviar cmd + ctrl + shift + 4 (captura de pantalla al portapapeles en macOS)
+                 SEND_STRING(SS_LGUI(SS_LCTL(SS_LSFT(SS_TAP(X_4)))));
+            }
+            return false;
+
         case KC_SCRT:
             if (record->event.pressed) {
                 SEND_STRING(SECRET);
@@ -119,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, KC_ARROBA, KC_UP, XXXXXXX, XXXXXXX,  XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_S_S_A, XXXXXXX,
   _______, KC_LEFT, KC_DOWN,  KC_RIGHT, XXXXXXX, XXXXXXX,                        KC_LEFT, KC_DOWN, KC_UP,  KC_RIGHT, KC_SCLN, XXXXXXX,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, KC_PICOL,       KC_PICOR, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,
-                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX,  TG(4), KC_LGUI, KC_INVERT
+                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       KC_S_S_AMAC,  TG(4), KC_LGUI, KC_INVERT
 ),
 
 
