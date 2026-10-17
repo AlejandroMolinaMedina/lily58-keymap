@@ -10,6 +10,11 @@ mapa obliga a revisar `alejandromolinamedina/README.md` **antes** del commit:
    capa, su diagrama ASCII y las secciones que la mencionen (lista de macros,
    caracteristicas, teclas de pulgar).
 2. Si hay desfase, actualiza el README. Si no lo hay, no lo toques.
+   Los diagramas de las capas no se editan a mano: se regeneran con
+   `python3 tools/draw_layers.py --write`, que los dibuja desde el `keymap.c`
+   y los sustituye en su seccion. Sin argumentos los imprime sin tocar nada.
+   Lo que si se escribe a mano es la prosa: la descripcion de cada capa y las
+   listas de teclas y macros.
 3. El README actualizado se commitea: en el **mismo commit** que el keymap cuando
    ese cambio todavia no esta commiteado, o en un **commit propio de docs** cuando
    el cambio del layout ya quedo en un commit anterior.
