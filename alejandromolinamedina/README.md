@@ -8,10 +8,13 @@ Este repositorio contiene la configuración personalizada de mi teclado mecánic
 * **Macros para Símbolos:** Soluciones integradas para caracteres conflictivos en sistemas en español como la arroba (`@`), menor/mayor que (`<`, `>`) y la barra invertida (`\`).
 * **Capa de Automatización (Secretos):** Acceso rápido a strings de texto automatizados mediante la inclusión de credenciales locales (`secrets.h`).
 * **Control Multimedia:** Configuración nativa de encoders rotativos para la gestión de volumen general.
+* **Capa de macOS:** Capa 4 conmutable con `TG(4)`, que cambia los pulgares a Cmd y Option sin tocar el resto del layout. El mismo teclado sirve en Windows/Linux y en Mac.
 
 ---
 
 ## 🗺️ Mapa de Capas y Distribución
+
+Los diagramas siguen la forma real del Lily58: seis columnas por mitad, las dos teclas interiores que sobresalen hacia el centro y el bloque de cuatro pulgares, con el espacio separado del resto. En ellos, `·` es una tecla transparente (`_______`, hereda lo que haya en la capa de abajo) y una celda en blanco es una tecla sin asignar (`XXXXXXX`).
 
 ### Capa 0: Base (Principal)
 Capa alfanumérica estándar por defecto. Combina modificadores esenciales y la gestión de capas en los pulgares para máxima ergonomía.
@@ -24,20 +27,17 @@ Capa alfanumérica estándar por defecto. Combina modificadores esenciales y la 
 * **Encoders:** Giro antihorario (`KC_VOLD` - Bajar volumen) / Giro horario (`KC_VOLU` - Subir volumen).
 
 ```text
-┌────────────────────────────────────────────────────────┐ ┌────────────────────────────────────────────────────────┐
-│  ESC │   1  │   2  │   3  │   4  │   5  │          │ │          │   6  │   7  │   8  │   9  │   0  │   -  │
-├──────┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┐      │ │      ┌───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬──────┤
-│   TAB    │   Q   │   W   │   E   │   R   │   T   │      │ │      │   Y   │   U   │   I   │   O   │   P   │   [  │
-├──────────┴─┬─┬───┴───┬───┴───┬───┴───┬───┴───┼───┐  │ │  ┌───┼───┬───┴───┬───┴───┬───┴───┬───┴───┬─┴──────────┤
-│   LSHIFT   │ A │   S   │   D   │   F   │   G   │   │  │ │  │   │   H   │   J   │   K   │   L   │   '   │   \  │
-├────────────┴─┬─┴───┬───┴───┬───┴───┬───┴───┬───┴───┼──┤ ├──┼───┴───┬───┴───┬───┴───┬───┴───┬───┴─┬──────────┤
-│   LCTRL      │   Z │   X   │   C   │   V   │   B   │ ` │ │BSPC│   N   │   M   │   ,   │   .   │   / │   RALT   │
-└──────────────┴─────┴───────┴───────┴───┬───┴───┬───┴───┤ ├───┴───┬───┴───┬───┴───┬───────┴─────┴──────────┘
-                                         │ MO(1) │ LALT  │ │ SPACE │ MO(2) │
-                                         │       ├───────┤ ├───────┤       │
-                                         │ TG(3) │ SPACE │ │ ENTER │  ]    │
-                                         └───────┴───────┘ └───────┴───────┘
-
+┌─────┬─────┬─────┬─────┬─────┬─────┐                          ┌─────┬─────┬─────┬─────┬─────┬─────┐
+│ ESC │  1  │  2  │  3  │  4  │  5  │                          │  6  │  7  │  8  │  9  │  0  │  -  │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│ TAB │  Q  │  W  │  E  │  R  │  T  │                          │  Y  │  U  │  I  │  O  │  P  │  [  │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│ LSFT│  A  │  S  │  D  │  F  │  G  │                          │  H  │  J  │  K  │  L  │  '  │  \  │
+├─────┼─────┼─────┼─────┼─────┼─────┼─────┐              ┌─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+│ LCTL│  Z  │  X  │  C  │  V  │  B  │  `  │              │ BSPC│  N  │  M  │  ,  │  .  │  /  │ RALT│
+└─────┴─────┴──┬──┴──┬──┴──┬──┴──┬──┼─────┤              ├─────┼──┬──┴──┬──┴──┬──┴──┬──┴─────┴─────┘
+               │ MO1 │ LALT│ TG3 │  │ SPC │              │ SPC │  │ MO2 │ ENT │  ]  │
+               └─────┴─────┴─────┘  └─────┘              └─────┘  └─────┴─────┴─────┘
 ```
 
 ---
@@ -53,23 +53,21 @@ Se accede manteniendo presionado el botón asignado en el pulgar izquierdo. Dise
 * `\` (Barra invertida): Ubicada en el pulgar derecho inferior, fuerza `AltGr + -` para asegurar su salida en layouts en español.
 
 
-* **Atajos:** `KC_S_S_A` envía la combinación `Win + Shift + S` para la herramienta de recortes.
+* **Atajos de captura:** `KC_S_S_A` envía `Win + Shift + S` (herramienta de recortes de Windows) y `KC_S_S_AMAC` envía `Cmd + Ctrl + Shift + 4` (captura de región al portapapeles en macOS), en el pulgar derecho.
+* **TG(4):** Alterna la **Capa 4** (macOS), en el pulgar derecho. Es la única tecla que entra y sale de esa capa.
 
 ```text
-┌────────────────────────────────────────────────────────┐ ┌────────────────────────────────────────────────────────┐
-│   F1 │  F2   │  F3   │  F4   │  F5   │  F6   │          │ │          │  F7   │  F8   │  F9   │  F10  │  F11  │  F12  │
-├──────┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┐      │ │      ┌───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬──────┤
-│          │   @   │   ↑   │       │       │       │      │ │      │       │       │       │       │Win+S+S│      │
-├──────────┴─┬─┬───┴───┬───┴───┬───┴───┬───┴───┼───┐  │ │  ┌───┼───┬───┴───┬───┴───┬───┴───┬───┴───┬─┴──────────┤
-│  _______   │ ← │   ↓   │   →   │       │       │   │  │ │  │   │   ←   │   ↓   │   ↑   │   →   │   ;   │      │
-├────────────┴─┬─┴───┬───┴───┬───┴───┬───┴───┬───┴───┼──┤ ├──┼───┴───┬───┴───┬───┴───┬───┴───┬───┴─┬──────────┤
-│  _______   │     │       │       │_______│       │ < │ │ > │       │       │       │       │     │          │
-└──────────────┴─────┴───────┴───────┴───┬───┴───┬───┴───┤ ├───┴───┬───┴───┬───┴───┬───────┴─────┴──────────┘
-                                         │       │       │ │       │       │
-                                         │       ├───────┤ ├───────┤       │
-                                         │       │       │ │ LGUI  │   \   │
-                                         └───────┴───────┘ └───────┴───────┘
-
+┌─────┬─────┬─────┬─────┬─────┬─────┐                          ┌─────┬─────┬─────┬─────┬─────┬─────┐
+│  F1 │  F2 │  F3 │  F4 │  F5 │  F6 │                          │  F7 │  F8 │  F9 │ F10 │ F11 │ F12 │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│     │  @  │  ↑  │     │     │     │                          │     │     │     │     │WIN+S│     │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│  ·  │  ←  │  ↓  │  →  │     │     │                          │  ←  │  ↓  │  ↑  │  →  │  ;  │     │
+├─────┼─────┼─────┼─────┼─────┼─────┼─────┐              ┌─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+│  ·  │     │     │     │  ·  │     │  <  │              │  >  │     │     │     │     │     │     │
+└─────┴─────┴──┬──┴──┬──┴──┬──┴──┬──┼─────┤              ├─────┼──┬──┴──┬──┴──┬──┴──┬──┴─────┴─────┘
+               │     │     │     │  │     │              │MAC+4│  │ TG4 │ LGUI│ ALT\│
+               └─────┴─────┴─────┘  └─────┘              └─────┘  └─────┴─────┴─────┘
 ```
 
 ---
@@ -78,31 +76,77 @@ Se accede manteniendo presionado el botón asignado en el pulgar izquierdo. Dise
 
 Se activa manteniendo presionado `MO(2)` en el pulgar derecho. Modifica la fila numérica superior para la inserción automatizada de cadenas de texto persistentes.
 
-* **Fila Superior:** Mapea las macros de `KC_SCRT` a `KC_SCRT3`, las cuales inyectan los strings `SECRET`, `SECRET1`, `SECRET2` y `SECRET3` definidos de forma privada.
+* **Fila Superior:** `KC_SCRT` a `KC_SCRT3` inyectan los strings `SECRET` a `SECRET3`, definidos de forma privada. `KC_SCRT4` y `KC_SCRT5` escriben un correo completo (usuario, la arroba y el dominio). `KC_SCRT6` inyecta `SECRET6` y es la primera tecla de la mano derecha.
 * **Navegación Extra:** Mantiene el bloque de flechas izquierdo activo junto con un acceso directo a `Delete` (`KC_DEL`) en la sección central del pulgar derecho.
+* **Pulgares:** sin asignar en esta capa. Los nueve `#define` que necesita `secrets.h` están listados en `secrets.h.example`.
 
 ```text
-┌────────────────────────────────────────────────────────┐ ┌────────────────────────────────────────────────────────┐
-│ SCRT │ SCRT1 │ SCRT2 │ SCRT3 │_______│_______│          │ │          │_______│_______│_______│_______│_______│_______│
-├──────┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┐      │ │      ┌───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬──────┤
-│          │   @   │   ↑   │       │       │       │      │ │      │       │       │       │       │       │      │
-├──────────┴─┬─┬───┴───┬───┴───┬───┴───┬───┴───┼───┐  │ │  ┌───┼───┬───┴───┬───┴───┬───┴───┬───┴───┬─┴──────────┤
-│   RSHIFT   │ ← │   ↓   │   →   │       │       │   │  │ │  │   │   │       │       │       │       │       │      │
-├────────────┴─┬─┴───┬───┴───┬───┴───┬───┴───┬───┴───┼──┤ ├──┼───┴───┬───┴───┬───┴───┬───┴───┬───┴─┬──────────┤
-│   LCTRL      │     │       │       │       │       │   │ │ │DEL│       │       │       │       │     │          │
-└──────────────┴─────┴───────┴───────┴───┬───┴───┬───┴───┤ ├───┴───┬───┴───┬───┴───┬───────┴─────┴──────────┘
-                                         │       │       │ │       │       │
-                                         │       ├───────┤ ├───────┤       │
-                                         │ TG(3) │       │ │       │       │
-                                         └───────┴───────┘ └───────┴───────┘
-
+┌─────┬─────┬─────┬─────┬─────┬─────┐                          ┌─────┬─────┬─────┬─────┬─────┬─────┐
+│ SCRT│SCRT1│SCRT2│SCRT3│SCRT4│SCRT5│                          │SCRT6│  ·  │  ·  │  ·  │  ·  │  ·  │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│     │  @  │  ↑  │     │     │     │                          │     │     │     │     │     │     │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│ RSFT│  ←  │  ↓  │  →  │     │     │                          │     │     │     │     │     │     │
+├─────┼─────┼─────┼─────┼─────┼─────┼─────┐              ┌─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+│ LCTL│     │     │     │     │     │     │              │ DEL │     │     │     │     │     │     │
+└─────┴─────┴──┬──┴──┬──┴──┬──┴──┬──┼─────┤              ├─────┼──┬──┴──┬──┴──┬──┴──┬──┴─────┴─────┘
+               │     │     │     │  │     │              │     │  │     │     │     │
+               └─────┴─────┴─────┘  └─────┘              └─────┘  └─────┴─────┴─────┘
 ```
 
 ---
 
 ### Capa 3: Reserva / Bloqueo
 
-Capa actualmente configurada con exclusiones (`XXXXXXX`). Actúa como espacio reservado para futuras expansiones del firmware o funciones de macro avanzadas.
+Se alterna con `TG(3)` desde la capa 0. Casi todo son exclusiones (`XXXXXXX`), con solo el bloque de flechas izquierdo, `RSHIFT`, `LCTRL`, `` ` `` y `DEL` definidos, así que al activarla el teclado parece muerto. Se sale con la misma tecla, que sigue siendo `TG(3)` dentro de la capa. Espacio reservado para futuras expansiones.
+
+```text
+┌─────┬─────┬─────┬─────┬─────┬─────┐                          ┌─────┬─────┬─────┬─────┬─────┬─────┐
+│  ·  │     │     │     │     │     │                          │     │     │     │     │     │     │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│     │  ·  │  ↑  │     │     │     │                          │     │     │     │     │     │     │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│ RSFT│  ←  │  ↓  │  →  │     │     │                          │     │     │     │     │     │     │
+├─────┼─────┼─────┼─────┼─────┼─────┼─────┐              ┌─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+│ LCTL│     │     │     │     │     │  `  │              │ DEL │     │     │     │     │     │     │
+└─────┴─────┴──┬──┴──┬──┴──┬──┴──┬──┼─────┤              ├─────┼──┬──┴──┬──┴──┬──┴──┬──┴─────┴─────┘
+               │     │     │ TG3 │  │     │              │     │  │     │     │     │
+               └─────┴─────┴─────┘  └─────┘              └─────┘  └─────┴─────┴─────┘
+```
+
+---
+
+### Capa 4: macOS (Toggle)
+
+Se alterna con `TG(4)`, en el pulgar derecho de la capa 1: se mantiene `MO(1)` y se toca esa tecla, tanto para entrar como para salir.
+
+Cambia **solo dos teclas** de pulgar izquierdo y deja el resto del layout intacto:
+
+* **Cmd** (`KC_LGUI`) donde la capa 0 tiene `LALT`.
+* **Option** (`KC_LALT`) a su derecha, donde la capa 0 tiene `TG(3)`.
+
+```text
+┌─────┬─────┬─────┬─────┬─────┬─────┐                          ┌─────┬─────┬─────┬─────┬─────┬─────┐
+│  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │                          │  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │                          │  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │
+├─────┼─────┼─────┼─────┼─────┼─────┤                          ├─────┼─────┼─────┼─────┼─────┼─────┤
+│  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │                          │  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │
+├─────┼─────┼─────┼─────┼─────┼─────┼─────┐              ┌─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+│  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │              │  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │  ·  │
+└─────┴─────┴──┬──┴──┬──┴──┬──┴──┬──┼─────┤              ├─────┼──┬──┴──┬──┴──┬──┴──┬──┴─────┴─────┘
+               │  ·  │ CMD │ OPT │  │  ·  │              │  ·  │  │  ·  │  ·  │  ·  │
+               └─────┴─────┴─────┘  └─────┘              └─────┘  └─────┴─────┴─────┘
+```
+
+Todo lo demás va transparente (`_______`) a propósito, y conviene no "completar" esta capa: QMK resuelve cada tecla de la capa activa más alta hacia abajo y se detiene en la primera que no sea transparente, así que una capa 4 con el layout completo taparía a las capas 1, 2 y 3 — y dejaría `TG(4)`, que vive en la capa 1, inalcanzable: no habría forma de salir salvo desconectar el teclado.
+
+Dos consecuencias de ese diseño:
+
+* Dentro de macOS **no se alterna la capa 3**, porque Option ocupa ese pulgar. Los pulgares izquierdos son solo cuatro: `MO(1)`, Cmd, Option y espacio.
+* Las capas 1 y 2 siguen disponibles con sus teclas de siempre, incluida la captura `KC_S_S_AMAC`.
+
+Pendiente: las macros `KC_ARROBA`, `KC_INVERT`, `KC_SCRT4` y `KC_SCRT5` usan `AltGr`, que en macOS es Option y no produce los mismos caracteres.
 
 ---
 
