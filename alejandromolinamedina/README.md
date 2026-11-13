@@ -21,9 +21,13 @@ Capa alfanumérica estándar por defecto. Combina modificadores esenciales y la 
 
 * **MO(1):** Mantiene activa la **Capa 1** (Símbolos/Navegación).
 * **MO(2):** Mantiene activa la **Capa 2** (Secretos), en el pulgar derecho.
-* **TG(3):** Alterna (Toggle) la **Capa 3**, en el pulgar izquierdo. Ojo: la capa 3
-  esta casi vacia, asi que si la activas sin querer el teclado parece muerto.
-  Se sale presionando esa misma tecla otra vez, o desconectando el teclado.
+* **LALT doble:** las dos teclas centrales del pulgar izquierdo son `KC_LALT`.
+* **TG(3):** Alterna (Toggle) la **Capa 3**, en la tecla separada del pulgar izquierdo
+  (donde antes estaba el espacio izquierdo). Ojo: la capa 3 esta casi vacia, asi que si
+  la activas sin querer el teclado parece muerto. Para salir no sirve la misma tecla:
+  dentro de la capa 3 el `TG(3)` esta en la tecla de al lado (la segunda `LALT` de la
+  capa 0). Ver la capa 3.
+* **Espacio:** solo queda el del pulgar derecho.
 * **Encoders:** Giro antihorario (`KC_VOLD` - Bajar volumen) / Giro horario (`KC_VOLU` - Subir volumen).
 
 ```text
@@ -36,7 +40,7 @@ Capa alfanumérica estándar por defecto. Combina modificadores esenciales y la 
 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┐              ┌─────┼─────┼─────┼─────┼─────┼─────┼─────┤
 │ LCTL│  Z  │  X  │  C  │  V  │  B  │  `  │              │ BSPC│  N  │  M  │  ,  │  .  │  /  │ RALT│
 └─────┴─────┴──┬──┴──┬──┴──┬──┴──┬──┼─────┤              ├─────┼──┬──┴──┬──┴──┬──┴──┬──┴─────┴─────┘
-               │ MO1 │ LALT│ TG3 │  │ SPC │              │ SPC │  │ MO2 │ ENT │  ]  │
+               │ MO1 │ LALT│ LALT│  │ TG3 │              │ SPC │  │ MO2 │ ENT │  ]  │
                └─────┴─────┴─────┘  └─────┘              └─────┘  └─────┴─────┴─────┘
 ```
 
@@ -98,7 +102,7 @@ Se activa manteniendo presionado `MO(2)` en el pulgar derecho. Modifica la fila 
 
 ### Capa 3: Reserva / Bloqueo
 
-Se alterna con `TG(3)` desde la capa 0. Casi todo son exclusiones (`XXXXXXX`), con solo el bloque de flechas izquierdo, `RSHIFT`, `LCTRL`, `` ` `` y `DEL` definidos, así que al activarla el teclado parece muerto. Se sale con la misma tecla, que sigue siendo `TG(3)` dentro de la capa. Espacio reservado para futuras expansiones.
+Se alterna con `TG(3)` desde la capa 0. Casi todo son exclusiones (`XXXXXXX`), con solo el bloque de flechas izquierdo, `RSHIFT`, `LCTRL`, `` ` `` y `DEL` definidos, así que al activarla el teclado parece muerto. Se entra con la tecla separada del pulgar izquierdo, pero se sale con la de su izquierda (la segunda `LALT` de la capa 0), que es donde está el `TG(3)` dentro de esta capa; la tecla con la que se entró es `XXXXXXX` aquí. Espacio reservado para futuras expansiones.
 
 ```text
 ┌─────┬─────┬─────┬─────┬─────┬─────┐                          ┌─────┬─────┬─────┬─────┬─────┬─────┐
@@ -123,7 +127,7 @@ Se alterna con `TG(4)`, en el pulgar derecho de la capa 1: se mantiene `MO(1)` y
 Cambia **solo dos teclas** de pulgar izquierdo y deja el resto del layout intacto:
 
 * **Cmd** (`KC_LGUI`) donde la capa 0 tiene `LALT`.
-* **Option** (`KC_LALT`) a su derecha, donde la capa 0 tiene `TG(3)`.
+* **Option** (`KC_LALT`) a su derecha, donde la capa 0 tiene la segunda `LALT`.
 
 ```text
 ┌─────┬─────┬─────┬─────┬─────┬─────┐                          ┌─────┬─────┬─────┬─────┬─────┬─────┐
@@ -143,7 +147,8 @@ Todo lo demás va transparente (`_______`) a propósito, y conviene no "completa
 
 Dos consecuencias de ese diseño:
 
-* Dentro de macOS **no se alterna la capa 3**, porque Option ocupa ese pulgar. Los pulgares izquierdos son solo cuatro: `MO(1)`, Cmd, Option y espacio.
+* Los pulgares izquierdos quedan como `MO(1)`, Cmd, Option y `TG(3)` (este último heredado de la capa 0, porque la capa 4 deja esa tecla transparente).
+* **No actives la capa 3 estando en macOS.** El `TG(3)` de salida está en la tecla que la capa 4 ocupa con Option, así que queda tapado; y como la capa 3 bloquea `MO(1)`, tampoco se llega a `TG(4)`. La única salida es desconectar el teclado.
 * Las capas 1 y 2 siguen disponibles con sus teclas de siempre, incluida la captura `KC_S_S_AMAC`.
 
 Pendiente: las macros `KC_ARROBA`, `KC_INVERT`, `KC_SCRT4` y `KC_SCRT5` usan `AltGr`, que en macOS es Option y no produce los mismos caracteres.
